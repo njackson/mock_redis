@@ -23,7 +23,12 @@ class MockRedis
 
     def add(score, member)
       members.add(member)
-      if score.to_f.to_i == score.to_f
+
+      if score == '+inf'
+        scores[member] = Float::INFINITY
+      elsif score == '-inf'
+        scores[member] = -Float::INFINITY
+      elsif score.to_f.to_i == score.to_f
         scores[member] = score.to_f.to_i
       else
         scores[member] = score.to_f
